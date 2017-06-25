@@ -4,7 +4,7 @@
 
 #include "gtfs-realtime.pb.h"
 
-#include "gtfs_parser.hpp"
+#include "gtfs_handler.hpp"
 
 int main(int argc, char ** argv) {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -18,7 +18,7 @@ int main(int argc, char ** argv) {
         return -1;
     }
 
-    GTFS_Parser gtfs_handler;
+    GTFS_Handler gtfs_handler;
     
     gtfs_handler.parse_gtfs_file(feed);
 

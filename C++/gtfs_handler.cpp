@@ -1,8 +1,8 @@
 #include "gtfs-realtime.pb.h"
 
-#include "gtfs_parser.hpp"
+#include "gtfs_handler.hpp"
 
-void GTFS_Parser::parse_gtfs_file(transit_realtime::FeedMessage feed){
+void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
     //------------------------------Feed Header------------------------------
     const transit_realtime::FeedHeader& header = feed.header();
     
