@@ -1,28 +1,8 @@
-#include <iostream>
-#include <fstream>
-#include <string>
 #include "gtfs-realtime.pb.h"
 
-void parse_gtfs_file(transit_realtime::FeedMessage feed);
+#include "gtfs_parser.hpp"
 
-int main(int argc, char ** argv) {
-	GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-    transit_realtime::FeedMessage feed;
-    
-    std::fstream input(argv[1], std::ios::in | std::ios::binary);
-    
-    if (!feed.ParseFromIstream(&input)) {
-        std::cerr << "Failed to parse feed." << std::endl;
-        return -1;
-    }
-    
-    parse_gtfs_file(feed);
-
-	return 0;
-}
-
-void parse_gtfs_file(transit_realtime::FeedMessage feed){
+void GTFS_Parser::parse_gtfs_file(transit_realtime::FeedMessage feed){
     //------------------------------Feed Header------------------------------
     const transit_realtime::FeedHeader& header = feed.header();
     
@@ -33,7 +13,7 @@ void parse_gtfs_file(transit_realtime::FeedMessage feed){
     for (int i = 0; i < feed.entity_size(); i++){
         const transit_realtime::FeedEntity& entity = feed.entity(i);
         
-//        std::cout << "Entity ID: " << entity.id() << std::endl;
+        std::cout << "Entity ID: " << entity.id() << std::endl;
         
         //TripUpdate is optional
         if(entity.has_trip_update()){
