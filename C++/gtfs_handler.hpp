@@ -1,3 +1,11 @@
+//
+//  File: gtfs_handler.hpp
+//  Project: GTFS/C++
+//
+//  Created by Anthony Walker on 7/25/17.
+//  Copyright © 2017 Anthony Walker. All rights reserved.
+//
+
 #ifndef GTFS_HANDLER_HPP_
 #define GTFS_HANDLER_HPP_
 
