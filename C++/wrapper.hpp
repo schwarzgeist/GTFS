@@ -6,6 +6,7 @@
 extern "C" {
 #endif
 
+	const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed);
 
 #ifdef __cplusplus
 }

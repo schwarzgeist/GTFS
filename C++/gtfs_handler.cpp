@@ -2,7 +2,7 @@
 
 #include "gtfs_handler.hpp"
 
-void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
+const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
     //------------------------------Feed Header------------------------------
     const transit_realtime::FeedHeader& header = feed.header();
     

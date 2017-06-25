@@ -4,10 +4,11 @@
 #include "gtfs-realtime.pb.h"
 
 class GTFS_Handler{
-private:
-
 public:
-	void parse_gtfs_file(transit_realtime::FeedMessage feed);
+	explicit GTFS_Handler(void);
+	~GTFS_Handler(void);
+
+	const void parse_gtfs_file(transit_realtime::FeedMessage feed);
 };
 
 #endif // GTFS_PARSER_HPP_
