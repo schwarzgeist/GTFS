@@ -1,5 +1,5 @@
-#ifndef BRIDGE_HPP_
-#define BRIDGE_HPP_
+#ifndef WRAPPER_HPP_
+#define WRAPPER_HPP_
 
 
 #ifdef __cplusplus
@@ -12,4 +12,4 @@ extern "C" {
 }
 #endif
 
-#endif BRIDGE_HPP_
+#endif //WRAPPER_HPP_

@@ -5,7 +5,7 @@
 
 class GTFS_Handler{
 public:
-	explicit GTFS_Handler(void);
+	GTFS_Handler(void);
 	~GTFS_Handler(void);
 
 	const void parse_gtfs_file(transit_realtime::FeedMessage feed);
