@@ -3,6 +3,8 @@
 #include <string>
 #include "gtfs-realtime.pb.h"
 
+void parse_gtfs_file(transit_realtime::FeedMessage feed);
+
 int main(int argc, char ** argv) {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
@@ -15,6 +17,12 @@ int main(int argc, char ** argv) {
         return -1;
     }
     
+    parse_gtfs_file(feed);
+
+	return 0;
+}
+
+void parse_gtfs_file(transit_realtime::FeedMessage feed){
     //------------------------------Feed Header------------------------------
     const transit_realtime::FeedHeader& header = feed.header();
     
@@ -25,7 +33,7 @@ int main(int argc, char ** argv) {
     for (int i = 0; i < feed.entity_size(); i++){
         const transit_realtime::FeedEntity& entity = feed.entity(i);
         
-        std::cout << "Entity ID: " << entity.id() << std::endl;
+//        std::cout << "Entity ID: " << entity.id() << std::endl;
         
         //TripUpdate is optional
         if(entity.has_trip_update()){
@@ -170,17 +178,57 @@ int main(int argc, char ** argv) {
         
         if(entity.has_vehicle()){
             const transit_realtime::VehiclePosition& vehicle_position = entity.vehicle();
+            
+            //VehiclePosition.TripDescriptor.trip is optional
+            if (vehicle_position.has_trip()){
+                //--------------------TripDescriptor--------------------
+                //TripDescriptor is mandatory
+                const transit_realtime::TripDescriptor& trip = vehicle_position.trip();
+                
+                //TripDescriptor.trip_id is optional
+                if(trip.has_trip_id()){
+                    const std::string trip_id = trip.trip_id();
+                }
+                
+                //TripDescriptor.route_id is optional
+                if(trip.has_route_id()){
+                    const std::string route_id = trip.route_id();
+                }
+                
+                //TripDescriptor.direction_id is optional
+                if(trip.has_direction_id()){
+                    const uint32_t direction_id = trip.direction_id();
+                }
+                
+                //TripDescriptor.start_time is optional
+                if(trip.has_start_time()){
+                    const std::string start_time = trip.start_time();
+                }
+                
+                //TripDescriptor.start_date is optional
+                if(trip.has_start_date()){
+                    const std::string start_date = trip.start_date();
+                }
+                
+                //TripDescriptor.schedule_relationship is optional
+                if(trip.has_schedule_relationship()){
+                    const transit_realtime::TripDescriptor::ScheduleRelationship& schedule_relationship = trip.schedule_relationship();
+                    
+                    switch (schedule_relationship) {
+                        case transit_realtime::TripDescriptor::SCHEDULED:
+                        case transit_realtime::TripDescriptor::ADDED:
+                        case transit_realtime::TripDescriptor::UNSCHEDULED:
+                        case transit_realtime::TripDescriptor::CANCELED:
+                        default:
+                            break;
+                    }
+                }
+            }
         }
         
         if(entity.has_alert()){
             const transit_realtime::Alert& alert = entity.alert();
         }
-        
-        
     }
-    
-    //Delete all global objects allocated by libprotobuf.
-    //google::protobuf::ShutdownProtobufLibrary();
 
-	return 0;
 }
