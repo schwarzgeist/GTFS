@@ -31,6 +31,7 @@ int main(int argc, char ** argv) {
         if(entity.has_trip_update()){
             const transit_realtime::TripUpdate& trip_update = entity.trip_update();
             
+            //--------------------TripDescriptor--------------------
             //TripDescriptor is mandatory
             const transit_realtime::TripDescriptor& trip_descriptor = trip_update.trip();
             
@@ -73,6 +74,8 @@ int main(int argc, char ** argv) {
                 }
             }
             
+            //--------------------VehicleDescriptor--------------------
+            
             //VehicleDescriptor is optional
             if(trip_update.has_vehicle()){
                 const transit_realtime::VehicleDescriptor& vehicle_descriptor = trip_update.vehicle();
@@ -82,9 +85,87 @@ int main(int argc, char ** argv) {
                     const std::string id = vehicle_descriptor.id();
                 }
                 
-                //
+                //VehicleDescriptor.label is optional
+                if(vehicle_descriptor.has_label()){
+                    const std::string label = vehicle_descriptor.label();
+                }
+                
+                //VehicleDescriptor.license_plate is optional
+                if(vehicle_descriptor.has_license_plate()){
+                    const std::string license_plate = vehicle_descriptor.license_plate();
+                }
             }
             
+            //--------------------StopTimeUpdate/StopTimeEvent--------------------
+            
+            const int stop_time_update_size = trip_update.stop_time_update_size();
+            
+            for (int j = 0; j < stop_time_update_size; j++){
+                const transit_realtime::TripUpdate::StopTimeUpdate stop_time_update = trip_update.stop_time_update(j);
+                
+                //StopTimeUpdate.stop_sequence is optional
+                const uint32_t stop_sequence = stop_time_update.stop_sequence();
+                
+                //StopTimeUpdate.stop_id is optional
+                const std::string stop_id = stop_time_update.stop_id();
+                
+                //StopTimeUpdate.arrival is optional
+                if (stop_time_update.has_arrival()){
+                    const transit_realtime::TripUpdate::StopTimeEvent& stop_time_update_arrival = stop_time_update.arrival();
+                    
+                    if (stop_time_update_arrival.has_delay()){
+                        const int32_t delay = stop_time_update_arrival.delay();
+                    }
+                    
+                    if (stop_time_update_arrival.has_time()){
+                        const int64_t time = stop_time_update_arrival.time();
+                    }
+                    
+                    if (stop_time_update_arrival.has_uncertainty()){
+                        const int32_t uncertainty = stop_time_update_arrival.uncertainty();
+                    }
+                }
+                
+                //StopTimeUpdate.departure is optional
+                if (stop_time_update.has_departure()){
+                    const transit_realtime::TripUpdate::StopTimeEvent& stop_time_update_departure = stop_time_update.departure();
+                    
+                    if (stop_time_update_departure.has_delay()){
+                        const int32_t delay = stop_time_update_departure.delay();
+                    }
+                    
+                    if (stop_time_update_departure.has_time()){
+                        const int64_t time = stop_time_update_departure.time();
+                    }
+                    
+                    if (stop_time_update_departure.has_uncertainty()){
+                        const int32_t uncertainty = stop_time_update_departure.uncertainty();
+                    }
+                }
+                
+                //StopTimeUpdate.schedule_relationship is optional
+                if(stop_time_update.has_schedule_relationship()){
+                    const transit_realtime::TripUpdate::StopTimeUpdate::ScheduleRelationship& schedule_relationship = stop_time_update.schedule_relationship();
+                    
+                    switch (schedule_relationship) {
+                        case transit_realtime::TripUpdate::StopTimeUpdate::SCHEDULED:
+                        case transit_realtime::TripUpdate::StopTimeUpdate::SKIPPED:
+                        case transit_realtime::TripUpdate::StopTimeUpdate::NO_DATA:
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+            //TripUpdate.timestamp is optional
+            if (trip_update.has_timestamp()){
+                const int64_t timestamp = trip_update.timestamp();
+            }
+            
+            //TripUpdate.delay is optional
+            if (trip_update.has_delay()){
+                const int32_t delay = trip_update.delay();
+            }
         }
         
         if(entity.has_vehicle()){
