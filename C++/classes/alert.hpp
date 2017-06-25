@@ -1,4 +1,9 @@
-#ifndef ALERT_HPP_
-#define ALERT_HPP_
+#ifndef ALERT_HPP
+#define ALERT_HPP
 
-#endif ALERT_HPP_
+class Alert{
+    Alert();
+    ~Alert();
+};
+
+#endif //ALERT_HPP
