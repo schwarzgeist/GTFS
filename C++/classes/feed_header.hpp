@@ -10,6 +10,10 @@
 #define FEED_HEADER_HPP
 
 class Feed_Header {
+private:
+	const char * gtfs_realtime_version;
+
+public:
 	Feed_Header();
 	~Feed_Header();
 };

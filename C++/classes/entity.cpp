@@ -7,3 +7,9 @@
 //
 
 #include "entity.hpp"
+
+Entity::Entity() {
+    this->id = "";
+ }
+
+Entity::~Entity() { }

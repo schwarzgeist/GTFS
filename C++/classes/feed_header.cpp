@@ -7,3 +7,9 @@
 //
 
 #include "feed_header.hpp"
+
+Feed_Header::Feed_Header() {
+    this->gtfs_realtime_version = "";
+ }
+
+Feed_Header::~Feed_Header() { }

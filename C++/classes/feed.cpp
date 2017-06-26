@@ -7,3 +7,21 @@
 //
 
 #include "feed.hpp"
+#include "feed_header.hpp"
+#include "entity.hpp"
+
+Feed::Feed(){ }
+
+Feed::~Feed() { }
+
+Feed_Header Feed::get_feed_header() { 
+    return this->header;
+}
+
+int Feed::get_entity_count() {
+    return this->entity_size;
+}
+
+Entity * Feed::get_feed_entities() {
+    return this->entities;
+}

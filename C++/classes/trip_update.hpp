@@ -10,6 +10,7 @@
 #define TRIP_UPDATE_HPP
 
 class Trip_Update{
+public:
     Trip_Update();
     ~Trip_Update();
 };

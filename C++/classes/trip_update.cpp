@@ -7,3 +7,7 @@
 //
 
 #include "trip_update.hpp"
+
+Trip_Update::Trip_Update() { }
+
+Trip_Update::~Trip_Update() { }

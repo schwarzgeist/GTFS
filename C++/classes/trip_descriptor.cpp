@@ -7,3 +7,7 @@
 //
 
 #include "trip_descriptor.hpp"
+
+Trip_Descriptor::Trip_Descriptor() { }
+
+Trip_Descriptor::~Trip_Descriptor() { }

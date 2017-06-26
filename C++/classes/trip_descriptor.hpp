@@ -10,6 +10,7 @@
 #define TRIP_DESCRIPTOR_HPP
 
 class Trip_Descriptor{
+public:
     Trip_Descriptor();
     ~Trip_Descriptor();
 };
