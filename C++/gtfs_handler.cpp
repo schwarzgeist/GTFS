@@ -164,6 +164,8 @@ const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
             }
         }
         
+        //------------------------------Vehicle Position------------------------------
+
         if(entity.has_vehicle()){
             const transit_realtime::VehiclePosition& vehicle_position = entity.vehicle();
             
@@ -210,6 +212,90 @@ const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
                         default:
                             break;
                     }
+                }
+            }
+
+            //VehiclePosition.vehicle is optional
+            if(vehicle_position.has_vehicle()){
+                const transit_realtime::VehicleDescriptor& vehicle_descriptor = vehicle_position.vehicle();
+                
+                //VehiclePosition.id is optional
+                if(vehicle_descriptor.has_id()){
+                    const std::string id = vehicle_descriptor.id();
+                }
+                
+                //VehiclePosition.label is optional
+                if(vehicle_descriptor.has_label()){
+                    const std::string label = vehicle_descriptor.label();
+                }
+                
+                //VehiclePosition.license_plate is optional
+                if(vehicle_descriptor.has_license_plate()){
+                    const std::string license_plate = vehicle_descriptor.license_plate();
+                }
+            }
+
+            //VehiclePosition.position is optional
+            if (vehicle_position.has_position()){
+                const transit_realtime::Position& position = vehicle_position.position();
+
+                //Position.latitude is mandatory
+                const float latitude = position.latitude();
+
+                //Position.longitude is mandatory
+                const float longitude = position.longitude();
+
+                //Position.bearing is optional
+                if (position.has_bearing()){
+                    const float bearing = position.bearing();
+                }
+
+                //Position.speed is optional
+                if (position.has_speed()){
+                    const float speed = position.speed();
+                }
+            }
+
+            //VehiclePosition.current_stop_sequence is optional
+            if (vehicle_position.has_current_stop_sequence()){
+                const uint32_t current_stop_sequence = vehicle_position.current_stop_sequence();
+            }
+
+            //VehiclePosition.stop_id is optional
+            if (vehicle_position.has_stop_id()){
+                const std::string stop_id = vehicle_position.stop_id();
+            }
+
+            //VehiclePosition.current_status enum is optional
+            if (vehicle_position.has_current_status()){
+                const transit_realtime::VehiclePosition::VehicleStopStatus& vehicle_stop_status = vehicle_position.current_status();
+
+                switch (vehicle_stop_status){
+                    case transit_realtime::VehiclePosition::INCOMING_AT:
+                    case transit_realtime::VehiclePosition::STOPPED_AT:
+                    case transit_realtime::VehiclePosition::IN_TRANSIT_TO:
+                    default:
+                        break;
+                }
+            }
+
+            //VehiclePosition.timestamp is optional
+            if (vehicle_position.has_timestamp()){
+                const uint64_t timestamp = vehicle_position.timestamp();
+            }
+
+            //VehiclePosition.congestion_level enum type is optional
+            if (vehicle_position.has_congestion_level()){
+                const transit_realtime::VehiclePosition::CongestionLevel& congestion_level = vehicle_position.congestion_level();
+
+                switch (congestion_level){
+                    case transit_realtime::VehiclePosition::UNKNOWN_CONGESTION_LEVEL:
+                    case transit_realtime::VehiclePosition::RUNNING_SMOOTHLY:
+                    case transit_realtime::VehiclePosition::STOP_AND_GO:
+                    case transit_realtime::VehiclePosition::CONGESTION:
+                    case transit_realtime::VehiclePosition::SEVERE_CONGESTION:
+                    default:
+                        break;
                 }
             }
         }
