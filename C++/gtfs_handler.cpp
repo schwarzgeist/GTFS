@@ -245,6 +245,8 @@ const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
                 //Position.longitude is mandatory
                 const float longitude = position.longitude();
 
+                printf("Longitude: %f", longitude);
+
                 //Position.bearing is optional
                 if (position.has_bearing()){
                     const float bearing = position.bearing();
