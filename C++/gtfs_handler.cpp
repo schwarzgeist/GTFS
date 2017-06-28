@@ -420,6 +420,38 @@ const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
                     }
                 }
             }
+
+            if (alert.has_header_text()){
+                const transit_realtime::TranslatedString& header_text = alert.header_text();
+
+                const int translation_size = header_text.translation_size();                
+
+                for (int j = 0; j < translation_size; j++){
+                    const transit_realtime::TranslatedString::Translation& translation = header_text.translation(j);
+
+                    const std::string text = translation.text();
+
+                    if (translation.has_language()){
+                        const std::string language = translation.language();
+                    }
+                }
+            }
+
+            if (alert.has_description_text()){
+                const transit_realtime::TranslatedString& description_text = alert.description_text();
+
+                const int translation_size = description_text.translation_size();
+
+                for (int j = 0; j < translation_size; j++){
+                    const transit_realtime::TranslatedString::Translation& translation = description_text.translation(j);
+
+                    const std::string text = translation.text();
+
+                    if (translation.has_language()){
+                        const std::string language = translation.language();
+                    }
+                }
+            }
         }
     }
 
