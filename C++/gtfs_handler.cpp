@@ -298,10 +298,128 @@ const void GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
                         break;
                 }
             }
+
+            //VehiclePosition.occupancy_status enum type is optional
+            if (vehicle_position.has_occupancy_status()){
+                const transit_realtime::VehiclePosition::OccupancyStatus& occupancy_status = vehicle_position.occupancy_status();
+
+                switch(occupancy_status){
+                    case transit_realtime::VehiclePosition::EMPTY:
+                    case transit_realtime::VehiclePosition::MANY_SEATS_AVAILABLE:
+                    case transit_realtime::VehiclePosition::FEW_SEATS_AVAILABLE:
+                    case transit_realtime::VehiclePosition::STANDING_ROOM_ONLY:
+                    case transit_realtime::VehiclePosition::CRUSHED_STANDING_ROOM_ONLY:
+                    case transit_realtime::VehiclePosition::FULL:
+                    case transit_realtime::VehiclePosition::NOT_ACCEPTING_PASSENGERS:
+                    default:
+                        break;
+                }
+            }
         }
+
+        //------------------------------ Alert ------------------------------
         
         if(entity.has_alert()){
             const transit_realtime::Alert& alert = entity.alert();
+
+            const int active_period_size = alert.active_period_size();
+
+            for (int j = 0; j < active_period_size; j++){
+                const transit_realtime::TimeRange& active_period = alert.active_period(j);
+
+                if (active_period.has_start()){
+                    const uint64_t start = active_period.start();
+                }
+
+                if (active_period.has_end()){
+                    const uint64_t end = active_period.end();
+                }
+            }
+
+            const int informed_entity_size = alert.informed_entity_size();
+
+            for (int j = 0; j < informed_entity_size; j++){
+                const transit_realtime::EntitySelector informed_entity = alert.informed_entity(j);
+
+                if (informed_entity.has_agency_id()){
+                    const std::string agency_id = informed_entity.agency_id();
+                }
+
+                if (informed_entity.has_route_id()){
+                    const std::string route_id = informed_entity.route_id();
+                }
+
+                if (informed_entity.has_route_type()){
+                    const uint32_t route_type = informed_entity.route_type();
+                }
+
+                if (informed_entity.has_trip()){
+                    const transit_realtime::TripDescriptor& trip = informed_entity.trip();
+                }
+
+                if (informed_entity.has_stop_id()){
+                    const std::string stop_id = informed_entity.stop_id();
+                }
+            }
+
+            //Alert.cause is optional
+            if (alert.has_cause()){
+                const transit_realtime::Alert::Cause& cause = alert.cause();
+
+                switch(cause){
+                    case transit_realtime::Alert::UNKNOWN_CAUSE:
+                    case transit_realtime::Alert::OTHER_CAUSE:
+                    case transit_realtime::Alert::TECHNICAL_PROBLEM:
+                    case transit_realtime::Alert::STRIKE:
+                    case transit_realtime::Alert::DEMONSTRATION:
+                    case transit_realtime::Alert::ACCIDENT:
+                    case transit_realtime::Alert::HOLIDAY:
+                    case transit_realtime::Alert::WEATHER:
+                    case transit_realtime::Alert::MAINTENANCE:
+                    case transit_realtime::Alert::CONSTRUCTION:
+                    case transit_realtime::Alert::POLICE_ACTIVITY:
+                    case transit_realtime::Alert::MEDICAL_EMERGENCY:
+                    default:
+                        break;
+                }
+            }
+
+            //Alert.effect is optional
+            if (alert.has_effect()){
+                const transit_realtime::Alert::Effect& effect = alert.effect();
+
+                switch(effect){
+                    case transit_realtime::Alert::NO_SERVICE:
+                    case transit_realtime::Alert::REDUCED_SERVICE:
+                    case transit_realtime::Alert::SIGNIFICANT_DELAYS:
+                    case transit_realtime::Alert::DETOUR:
+                    case transit_realtime::Alert::ADDITIONAL_SERVICE:
+                    case transit_realtime::Alert::MODIFIED_SERVICE:
+                    case transit_realtime::Alert::OTHER_EFFECT:
+                    case transit_realtime::Alert::UNKNOWN_EFFECT:
+                    case transit_realtime::Alert::STOP_MOVED:
+                    default:
+                        break;
+                
+                }
+            }
+
+            //Alert.TranslatedString.url is optional
+            if (alert.has_url()){
+                const transit_realtime::TranslatedString& url = alert.url();
+
+                const int translation_size = url.translation_size();
+
+                for (int j = 0; j < translation_size; j++){
+                    const transit_realtime::TranslatedString::Translation& translation = url.translation(j);
+
+                    const std::string text = translation.text();
+
+                    if (translation.has_language()){
+                        const std::string language = translation.language();
+                    }
+                }
+            }
         }
     }
 
