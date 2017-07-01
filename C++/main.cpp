@@ -27,8 +27,14 @@ int main(int argc, char ** argv) {
     }
 
     GTFS_Handler gtfs_handler;
-    
-    gtfs_handler.parse_gtfs_file(feed);
+
+    if (gtfs_handler.parse_gtfs_file(feed)){
+        std::cout << "Parsed File Successfully!" << std::endl;
+    }
+
+    //std::cout << "Printing GTFS File" << std::endl;
+
+    //gtfs_handler.print_gtfs_file(feed);
 
 	return 0;
 }

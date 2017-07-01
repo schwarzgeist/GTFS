@@ -12,6 +12,10 @@
 
 Feed::Feed(){ }
 
+Feed::Feed(char * feed_file_contents) { 
+    
+}
+
 Feed::~Feed() { }
 
 Feed_Header Feed::get_feed_header() { 

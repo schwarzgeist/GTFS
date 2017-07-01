@@ -20,7 +20,8 @@ public:
 	GTFS_Handler(transit_realtime::FeedMessage feed);
 	~GTFS_Handler(void);
 
-	const void parse_gtfs_file(transit_realtime::FeedMessage feed);
+	const bool parse_gtfs_file(transit_realtime::FeedMessage feed);
+	const void print_gtfs_file(transit_realtime::FeedMessage feed);
 };
 
 #endif // GTFS_PARSER_HPP_
