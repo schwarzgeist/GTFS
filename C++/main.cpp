@@ -14,7 +14,42 @@
 
 #include "gtfs_handler.hpp"
 
-int main(int argc, char ** argv) {
+int main(int argc, char ** argv){
+	GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+    transit_realtime::FeedMessage feed;
+
+    std::ofstream output_file;
+    output_file.open("output.txt");
+
+    for (int i = 1; i < argc; i++)
+    {
+        std::fstream input(argv[i], std::ios::in | std::ios::binary);
+
+        if (!feed.ParseFromIstream(&input))
+        {
+            std::cerr << "Failed to parse feed." << std::endl;
+            return -1;
+        }
+
+        GTFS_Handler gtfs_handler;
+
+        if (gtfs_handler.parse_gtfs_file(feed))
+        {
+            std::cout << "Parsed File Successfully!" << std::endl;
+        }
+
+        std::cout << "Printing GTFS File" << std::endl;
+
+        output_file << gtfs_handler.print_gtfs_file(feed) << std::endl;
+    }
+
+    output_file.close();
+
+    return 0;
+}
+
+int main2(int argc, char ** argv) {
 	GOOGLE_PROTOBUF_VERIFY_VERSION;
 
     transit_realtime::FeedMessage feed;
@@ -32,9 +67,14 @@ int main(int argc, char ** argv) {
         std::cout << "Parsed File Successfully!" << std::endl;
     }
 
-    //std::cout << "Printing GTFS File" << std::endl;
+    std::cout << "Printing GTFS File" << std::endl;
 
-    //gtfs_handler.print_gtfs_file(feed);
+    std::ofstream output_file;
+    output_file.open("output" + std::to_string(rand()) + ".txt");
+
+    gtfs_handler.print_gtfs_file(feed);
+
+    output_file.close();
 
 	return 0;
 }

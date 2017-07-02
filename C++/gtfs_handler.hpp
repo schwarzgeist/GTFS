@@ -9,6 +9,8 @@
 #ifndef GTFS_HANDLER_HPP_
 #define GTFS_HANDLER_HPP_
 
+#include <fstream>
+#include <string>
 #include "gtfs-realtime.pb.h"
 
 class GTFS_Handler{
@@ -21,7 +23,7 @@ public:
 	~GTFS_Handler(void);
 
 	const bool parse_gtfs_file(transit_realtime::FeedMessage feed);
-	const void print_gtfs_file(transit_realtime::FeedMessage feed);
+	std::string print_gtfs_file(transit_realtime::FeedMessage feed);
 };
 
 #endif // GTFS_PARSER_HPP_

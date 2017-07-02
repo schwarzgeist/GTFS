@@ -1,3 +1,5 @@
+#include <fstream>
+
 #include "gtfs-realtime.pb.h"
 
 #include "gtfs_handler.hpp"
@@ -37,13 +39,6 @@ const bool GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
             //TripDescriptor.route_id is optional
             if(trip_descriptor.has_route_id()){
                 const std::string route_id = trip_descriptor.route_id();
-
-                if (route_id == "9688"){
-                    std::cout << "Found Light Rail Update!!!";
-
-                    std::cout << std::endl << std::endl << std::endl << std::endl << std::endl;
-                }
-                
             }
             
             //TripDescriptor.direction_id is optional
@@ -463,15 +458,16 @@ const bool GTFS_Handler::parse_gtfs_file(transit_realtime::FeedMessage feed){
     return true;
 }
 
-const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
+std::string GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
+    std::string tmp;
     //------------------------------Feed Header------------------------------
     const transit_realtime::FeedHeader& header = feed.header();
     
     const std::string gtfs_realtime_version = header.gtfs_realtime_version();
-    std::cout << "GTFS Realtime Version: " << gtfs_realtime_version << std::endl;
+    tmp += "GTFS Realtime Version: " + gtfs_realtime_version + "\n";
 
     const int  entity_size = feed.entity_size();
-    std::cout << "Entity Size: " << entity_size << std::endl;
+    tmp += "Entity Size: " + std::to_string(entity_size) + "\n";
     
     for (int i = 0; i < feed.entity_size(); i++){
         const transit_realtime::FeedEntity& entity = feed.entity(i);
@@ -487,31 +483,31 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
             //TripDescriptor.trip_id is optional
             if(trip_descriptor.has_trip_id()){
                 const std::string trip_id = trip_descriptor.trip_id();
-                std::cout << "TripID: " << trip_id;
+                tmp += "TripID: " + trip_id;
             }
             
             //TripDescriptor.route_id is optional
             if(trip_descriptor.has_route_id()){
                 const std::string route_id = trip_descriptor.route_id();
-                std::cout << "\t" << "RouteID: " << route_id;                
+                tmp += "RouteID:" + route_id;                
             }
             
             //TripDescriptor.direction_id is optional
             if(trip_descriptor.has_direction_id()){
                 const uint32_t direction_id = trip_descriptor.direction_id();
-                std::cout << "\t" << "DirectionID: " << direction_id;
+                tmp += "DirectionID: " + std::to_string(direction_id);
             }
             
             //TripDescriptor.start_time is optional
             if(trip_descriptor.has_start_time()){
                 const std::string start_time = trip_descriptor.start_time();
-                std::cout << "\t" << "StartTime: " << start_time;
+                tmp += "StartTime: " + start_time;
             }
             
             //TripDescriptor.start_date is optional
             if(trip_descriptor.has_start_date()){
                 const std::string start_date = trip_descriptor.start_date();
-                std::cout << "\t" << "StartDate: " << start_date;
+                tmp += "StartDate: " + start_date;
             }
             
             //TripDescriptor.schedule_relationship is optional
@@ -537,19 +533,19 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                 //VehicleDescriptor.id is optional
                 if(vehicle_descriptor.has_id()){
                     const std::string id = vehicle_descriptor.id();
-                    std::cout << "\t" << "ID: " << id;
+                    tmp += "ID: " + id;
                 }
                 
                 //VehicleDescriptor.label is optional
                 if(vehicle_descriptor.has_label()){
                     const std::string label = vehicle_descriptor.label();
-                    std::cout << "\t" << "Label: " << label;
+                    tmp += "Label: " + label;
                 }
                 
                 //VehicleDescriptor.license_plate is optional
                 if(vehicle_descriptor.has_license_plate()){
                     const std::string license_plate = vehicle_descriptor.license_plate();
-                    std::cout << "\t" << "LicensePlate: " << license_plate;
+                    tmp += "LicensePlate: " + license_plate;
                 }
             }
             
@@ -562,11 +558,11 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                 
                 //StopTimeUpdate.stop_sequence is optional
                 const uint32_t stop_sequence = stop_time_update.stop_sequence();
-                std::cout << "\t" << "StopSequence: " << stop_sequence;
+                tmp += "StopSequence: " + std::to_string(stop_sequence);
                 
                 //StopTimeUpdate.stop_id is optional
                 const std::string stop_id = stop_time_update.stop_id();
-                std::cout << "\t" << "StopID: " << stop_id;
+                tmp += "StopID: " + stop_id;
                 
                 //StopTimeUpdate.arrival is optional
                 if (stop_time_update.has_arrival()){
@@ -574,17 +570,17 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                     
                     if (stop_time_update_arrival.has_delay()){
                         const int32_t delay = stop_time_update_arrival.delay();
-                        std::cout << "\t" << "ArrivalDelay: " << delay;
+                        tmp += "ArrivalDelay: " + std::to_string(delay);
                     }
                     
                     if (stop_time_update_arrival.has_time()){
                         const int64_t time = stop_time_update_arrival.time();
-                        std::cout << "\t" << "ArrivalTime: " << time;
+                        tmp += "ArrivalTime: " + std::to_string(time);
                     }
                     
                     if (stop_time_update_arrival.has_uncertainty()){
                         const int32_t uncertainty = stop_time_update_arrival.uncertainty();
-                        std::cout << "\t" << "ArrivalUncertainty: " << uncertainty;
+                        tmp += "ArrivalUncertainty: " + std::to_string(uncertainty);
                     }
                 }
                 
@@ -594,17 +590,17 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                     
                     if (stop_time_update_departure.has_delay()){
                         const int32_t delay = stop_time_update_departure.delay();
-                        std::cout << "\t" << "DepartureDelay: " << delay;
+                        tmp += "DepartureDelay: " + std::to_string(delay);
                     }
                     
                     if (stop_time_update_departure.has_time()){
                         const int64_t time = stop_time_update_departure.time();
-                        std::cout << "\t" << "DepartureTime: " << time;
+                        tmp += "DepartureTime: " + std::to_string(time);
                     }
                     
                     if (stop_time_update_departure.has_uncertainty()){
                         const int32_t uncertainty = stop_time_update_departure.uncertainty();
-                        std::cout << "\t" << "DepartureUncertainty: " << uncertainty;
+                        tmp += "DepartureUncertainty: " + std::to_string(uncertainty);
                     }
                 }
                 
@@ -625,13 +621,13 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
             //TripUpdate.timestamp is optional
             if (trip_update.has_timestamp()){
                 const int64_t timestamp = trip_update.timestamp();
-                std::cout << "\t" << "TripUpdateTimestamp: " << timestamp;
+                tmp += "TripUpdateTimestamp: " + std::to_string(timestamp);
             }
             
             //TripUpdate.delay is optional
             if (trip_update.has_delay()){
                 const int32_t delay = trip_update.delay();
-                std::cout << "\t" << "TripUpdateDelay: " << delay;
+                tmp += "TripUpdateDelay: " + std::to_string(delay);
             }
         }
         
@@ -649,28 +645,32 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                 //TripDescriptor.trip_id is optional
                 if(trip.has_trip_id()){
                     const std::string trip_id = trip.trip_id();
+                    tmp += "TripID: " + trip_id;
                 }
                 
                 //TripDescriptor.route_id is optional
                 if(trip.has_route_id()){
                     const std::string route_id = trip.route_id();
 
-                    std::cout << "\t" << "Route ID: " << route_id;
+                    tmp += "TripRouteID: " + route_id;
                 }
                 
                 //TripDescriptor.direction_id is optional
                 if(trip.has_direction_id()){
                     const uint32_t direction_id = trip.direction_id();
+                    tmp += "TripDirectionID: " + std::to_string(direction_id);
                 }
                 
                 //TripDescriptor.start_time is optional
                 if(trip.has_start_time()){
                     const std::string start_time = trip.start_time();
+                    tmp += "TripStartTime: " + start_time;
                 }
                 
                 //TripDescriptor.start_date is optional
                 if(trip.has_start_date()){
                     const std::string start_date = trip.start_date();
+                    tmp += "TripStartDate: " + start_date;
                 }
                 
                 //TripDescriptor.schedule_relationship is optional
@@ -695,16 +695,19 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                 //VehiclePosition.id is optional
                 if(vehicle_descriptor.has_id()){
                     const std::string id = vehicle_descriptor.id();
+                    tmp += "VehicleID: " + id;
                 }
                 
                 //VehiclePosition.label is optional
                 if(vehicle_descriptor.has_label()){
                     const std::string label = vehicle_descriptor.label();
+                    tmp += "VehicleLabel: " + label;
                 }
                 
                 //VehiclePosition.license_plate is optional
                 if(vehicle_descriptor.has_license_plate()){
                     const std::string license_plate = vehicle_descriptor.license_plate();
+                    tmp += "VehicleLicensePlate: " + license_plate;
                 }
             }
 
@@ -714,31 +717,35 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
 
                 //Position.latitude is mandatory
                 const float latitude = position.latitude();
+                tmp += "VehiclePositionLatitude: " + std::to_string(latitude);
 
                 //Position.longitude is mandatory
                 const float longitude = position.longitude();
-
-                printf("Longitude: %f", longitude);
+                tmp += "VehiclePositionLongitude: " + std::to_string(longitude);
 
                 //Position.bearing is optional
                 if (position.has_bearing()){
                     const float bearing = position.bearing();
+                    tmp += "VehicleBearing: " + std::to_string(bearing);
                 }
 
                 //Position.speed is optional
                 if (position.has_speed()){
                     const float speed = position.speed();
+                    tmp += "VehicleSpeed: " + std::to_string(speed);
                 }
             }
 
             //VehiclePosition.current_stop_sequence is optional
             if (vehicle_position.has_current_stop_sequence()){
                 const uint32_t current_stop_sequence = vehicle_position.current_stop_sequence();
+                tmp += "VehicleStopSequence: " + std::to_string(current_stop_sequence);
             }
 
             //VehiclePosition.stop_id is optional
             if (vehicle_position.has_stop_id()){
                 const std::string stop_id = vehicle_position.stop_id();
+                tmp += "VehicleStopID: " + stop_id;
             }
 
             //VehiclePosition.current_status enum is optional
@@ -757,6 +764,7 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
             //VehiclePosition.timestamp is optional
             if (vehicle_position.has_timestamp()){
                 const uint64_t timestamp = vehicle_position.timestamp();
+                tmp += "VehicleTimestamp: " + std::to_string(timestamp);
             }
 
             //VehiclePosition.congestion_level enum type is optional
@@ -928,9 +936,9 @@ const void GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                 }
             }
         }
-
-        for (int i = 0; i < 5; i++){
-            std::cout << std::endl;
-        }
     }
+
+    tmp += "\n\n----------------------------------------------------------------------------------\n\n";
+
+    return tmp;
 }
