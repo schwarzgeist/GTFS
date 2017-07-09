@@ -533,7 +533,7 @@ std::string GTFS_Handler::print_gtfs_file(transit_realtime::FeedMessage feed){
                 //VehicleDescriptor.id is optional
                 if(vehicle_descriptor.has_id()){
                     const std::string id = vehicle_descriptor.id();
-                    tmp += "ID: " + id;
+                    tmp += "VehicleDescriptorID: " + id;
                 }
                 
                 //VehicleDescriptor.label is optional
