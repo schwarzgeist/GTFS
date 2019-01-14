@@ -1,5 +1,5 @@
 # GTFS #
-Used to mostly store GTFS-Realtime Stuff that may be useful to someone.
+Used to mostly store GTFS-Realtime Stuff that will hopefully be useful to someone.
 
 ## C++ ##
 Right now, just has a parser for reading in a file that's of the binary GTFS-Realtime format.
