@@ -1,0 +1,49 @@
+leg_group_id,fare_leg_name,network_id,from_area_id,contains_area_id,to_area_id,is_symmetrical,from_timeframe_id,to_timeframe_id,min_distance,max_distance,distance_type,service_id,min_amount,max_amount,fare_product_id,fare_container_id,rider_category_id,eligible_cap_id,amount,currency
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,,,,1.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,,sen,,0.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,,dis,,0.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,,stu,,1.40,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,,,,2.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,,sen,,1.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,,dis,,1.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,,stu,,2.00,USD
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_1_day_fare,,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_senior_local_1_day_fare,,sen,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_disability_local_1_day_fare,,dis,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_7_day_fare,,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_31_day_fare,,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_senior_local_31_day_fare,,sen,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_disability_local_31_day_fare,,dis,,,
+core_express_one_way_trip,,express,,,,,,,,,,,,,core_express_31_day_fare,,,,,
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmcard,,,1.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmcard_senior,sen,,0.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmcard,dis,,0.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmcard,stu,,1.40,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmcard,,,2.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmcard,sen,,1.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmcard,dis,,1.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmcard,stu,,2.00,USD
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_1_day_fare,charmcard,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_senior_local_1_day_fare,charmcard_senior,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_disability_local_1_day_fare,charmcard,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_7_day_fare,charmcard,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_31_day_fare,charmcard,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_senior_local_31_day_fare,charmcard_senior,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_disability_local_31_day_fare,charmcard,,,,
+core_express_one_way_trip,,express,,,,,,,,,,,,,core_express_31_day_fare,charmcard,,,,
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmpass,,,1.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmpass,sen,,0.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmpass,dis,,0.90,USD
+core_local_one_way_trip,One-way,core,,,,,,,,,,,,,,charmpass,stu,,1.40,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmpass,,,2.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmpass,sen,,1.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmpass,dis,,1.50,USD
+core_express_one_way_trip,One-way Express BusLink,express,,,,,,,,,,,,,,charmpass,stu,,2.00,USD
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_1_day_fare,charmpass,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_senior_local_1_day_fare,charmpass,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_disability_local_1_day_fare,charmpass,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_7_day_fare,charmpass,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,core_local_31_day_fare,charmpass,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_senior_local_31_day_fare,charmpass,,,,
+core_local_one_way_trip,,core,,,,,,,,,,,,,reduced_disability_local_31_day_fare,charmpass,,,,
+core_express_one_way_trip,,express,,,,,,,,,,,,,core_express_31_day_fare,charmpass,,,,

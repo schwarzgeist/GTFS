@@ -1,0 +1,5 @@
+service_id,monday,tuesday,wednesday,thursday,friday,saturday,sunday,start_date,end_date
+401,1,1,1,1,1,0,0,20210829,20221231
+402,0,0,0,0,0,1,0,20210829,20221231
+403,0,0,0,0,0,0,1,20210829,20221231
+404,0,0,0,0,0,0,0,20210829,20221231

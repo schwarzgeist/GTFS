@@ -1,0 +1,4 @@
+service_id,date,exception_type
+101,20220117,2
+103,20220117,1
+101CamdenR,20220117,1
