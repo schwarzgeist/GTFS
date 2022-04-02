@@ -1,6 +1,9 @@
+CXX=gcc
+CXXFLAGS +=`pkg-config --cflags --libs protobuf` -std=c++14
+
 all: gtfs-realtime.pb* gtfs_handler* main.cpp classes/*
-	@pkg-config --cflags protobuf # fails if protobuf is not installed
-	@c++ gtfs_handler.cpp gtfs-realtime.pb.cc main.cpp\
+	$(CXX) $(CXXFLAGS)\
+	  gtfs_handler.cpp main.cpp\
 	  classes/alert.cpp\
 	  classes/entity.cpp\
 	  classes/entity_selector.cpp
@@ -16,7 +19,7 @@ all: gtfs-realtime.pb* gtfs_handler* main.cpp classes/*
 	  classes/trip_update.cpp\
 	  classes/vehicle_descriptor.cpp\
 	  classes/vehicle_position.cpp\
-	 -o gtfs_parse_cpp `pkg-config --cflags --libs protobuf`
+	 -o gtfs_parse_cpp
 
 clean:
 	@rm gtfs_parse_cpp
